@@ -1,87 +1,152 @@
-# Welcome to React Router!
+# React PDF Starter Toolkit in React Router and JavaScript
 
-A modern, production-ready template for building full-stack React applications using React Router.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+[![Open example in codesandbox]()
 
-## Features
+Welcome to the React PDF Starter Toolkit! This repository provides a comprehensive guide on integrating React PDF with React Router and JavaScript. It showcases how React PDF can be integrated and rendered as part of a React.js project.
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Table of Contents
 
-## Getting Started
+- [Usage](#usage)
+  - [Project Setup](#project-setup)
+  - [Running the Example Project](#running-the-example-project)
+- [Examples](#examples)
 
-### Installation
+## Usage
 
-Install the dependencies:
+### Project Setup
 
-```bash
-npm install
+1. **Clone the Repository**: If you haven't already, clone the repository and navigate into the project directory.
+
+   ```bash
+   git clone https://github.com/react-pdf-dev/starter-rp-react-router-js.git
+   cd starter-rp-react-router-js
+   ```
+
+2. **Install Dependencies**: Install the necessary dependencies using npm, yarn, pnpm or bun.
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+### Running the Example Project
+
+This repository includes an example project to demonstrate React PDF in action.
+
+1. **Start the Development Server**: Use the following command to start the development server
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm run dev
+   # or
+   bun run dev
+   ```
+
+2. **Open in Browser**: Open your browser and navigate to `http://localhost:5173` (or the port specified in your terminal) to see the example project in action
+
+### Using the React PDF Component
+
+Once the example project is running, you can explore the source code to see how the React PDF component is integrated. Here is a brief overview:
+
+1.  **Import the component**: Import the desired React PDF component into your codes
+
+```jsx
+import {
+  RPProvider,
+  RPDefaultLayout,
+  RPPages,
+  RPConfig,
+} from "@pdf-viewer/react";
+
+const AppPdfViewer = (props) => {
+  const { showToolbar = true, defaultLayoutProps, pdfSrc } = props;
+  return (
+    <RPConfig licenseKey="YOUR_LICENSE_KEY">
+      <RPProvider src={pdfSrc}>
+        {showToolbar ? (
+          <RPDefaultLayout {...defaultLayoutProps}>
+            <RPPages />
+          </RPDefaultLayout>
+        ) : (
+          <div style={{ width: "100%", height: "550px" }}>
+            <RPPages />
+          </div>
+        )}
+      </RPProvider>
+    </RPConfig>
+  );
+};
+
+export default AppPdfViewer;
 ```
 
-### Development
+2. **Use the component in the page**: Add the React PDF component to your page
 
-Start the development server with HMR:
+```jsx
+import AppPdfViewer from "../components/AppPdfViewer";
 
-```bash
-npm run dev
+export function meta() {
+  return [
+    { title: "RP Starter Toolkit: React Router + JavaScript" },
+    { name: "description", content: "Welcome to React Router + JavaScript!" },
+  ];
+}
+
+export default function Home() {
+  const pdfSrc =
+    "https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf";
+  return (
+    <>
+      <div className="container">
+        <h1>RP Starter Toolkit: React Router + JavaScript</h1>
+        <br />
+        <h2>Default Toolbar</h2>
+        <AppPdfViewer pdfSrc={pdfSrc} />
+        <h2>Without Toolbar</h2>
+        <AppPdfViewer pdfSrc={pdfSrc}
+          showToolbar={false}
+          defaultLayoutProps={{
+            style: { width: "100%", height: "550px" },
+          }}
+        />
+        <h2>Mobile</h2>
+        <AppPdfViewer pdfSrc={pdfSrc}
+          defaultLayoutProps={{
+            style: { width: "500px" },
+          }}
+        />
+      </div>
+    </>
+  );
+}
 ```
 
-Your application will be available at `http://localhost:5173`.
+## Examples
 
-## Building for Production
+For more examples, please refer to the `src/routes/home.jsx` file in this repository:
 
-Create a production build:
+- Default Toolbar
+- Without Toolbar
+- Mobile View
 
-```bash
-npm run build
-```
+_Remark: If you would like more examples, feel free open an issue._
 
-## Deployment
+For more configurations, please check the [documentation](https://docs.react-pdf.dev) site.
 
-### Docker Deployment
+## Meta
 
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+- Homepage: [https://www.react-pdf.dev](https://www.react-pdf.dev)
+- Docs: [https://docs.react-pdf.dev](https://docs.react-pdf.dev)
 
 ---
 
-Built with ❤️ using React Router.
+Thank you for using React PDF! We hope this toolkit helps you build amazing React.js applications. If you have any questions or need further assistance on this example, please feel free to open an issue. Happy coding!

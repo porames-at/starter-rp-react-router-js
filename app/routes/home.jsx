@@ -1,12 +1,9 @@
-// import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 import AppPdfViewer from "../components/AppPdfViewer";
 
 export function meta() {
-  // export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "RP Starter Toolkit: React Router + JavaScript" },
+    { name: "description", content: "Welcome to React Router + JavaScript!" },
   ];
 }
 
@@ -15,8 +12,25 @@ export default function Home() {
     "https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf";
   return (
     <>
-      <h1>Starter RP + React router + JavaScript </h1>
-      <AppPdfViewer pdfSrc={pdfSrc} />
+      <div className="container">
+        <h1>RP Starter Toolkit: React Router + JavaScript</h1>
+        <br />
+        <h2>Default Toolbar</h2>
+        <AppPdfViewer pdfSrc={pdfSrc} />
+        <h2>Without Toolbar</h2>
+        <AppPdfViewer pdfSrc={pdfSrc}
+          showToolbar={false}
+          defaultLayoutProps={{
+            style: { width: "100%", height: "550px" },
+          }}
+        />
+        <h2>Mobile</h2>
+        <AppPdfViewer pdfSrc={pdfSrc}
+          defaultLayoutProps={{
+            style: { width: "500px" },
+          }}
+        />
+      </div>
     </>
   );
 }
